@@ -73,11 +73,33 @@ void loop()
   
   if (digitalRead(BUTTON_PIN) == HIGH)
   {
+<<<<<<< Updated upstream
     color = COLOR_RED;
   }
   else
   {
     color = COLOR_GREEN;
+=======
+    last_rot_ms = current_ms - last_switch_ms;
+    last_switch_ms = current_ms;
+  }
+
+  last_switch_pos = current_switch_pos;
+
+  /* We're gonna do the bottom half of the circle blue and the top green...yellow if we're too slow. */
+  if (last_rot_ms > 2000) 
+  {
+    // consider this stopped.
+    fillAll(COLOR_YELLOW); 
+  }
+  else if (current_ms > last_switch_ms + last_rot_ms / 2)
+  {
+    fillAll(COLOR_GREEN);
+  }
+  else
+  {
+    fillAll(COLOR_BLUE);
+>>>>>>> Stashed changes
   }
   
   fillAll(color);
